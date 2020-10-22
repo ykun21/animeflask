@@ -1,0 +1,42 @@
+{% extends "main.html" %}
+{% block title %}
+  HOME
+{% endblock %}
+{% block content %}
+<body id = "body">
+  <div class="mx-5 my-5">
+   <table class="table table-dark table-bordered table-striped">
+      <thead class="thead-light">
+         <tr>
+            <th scope="col">#</th>
+            <th scope="col">NAME</th>
+            <th scope="col">EPISODE NO</th>
+            <th scope="col">TYPE</th>
+            <th scope="col">DATE</th>
+         </tr>
+      </thead>
+      <tbody>
+      </tbody>
+   </table>
+ </div>
+   <script>
+      $(document).ready(function() {
+            //var json = {{content|safe}}
+            var json = [{'episode': '03', 'slug': '/anime/strike-witches-3-775962/episode-03-692659', 'type': 'SUB', 'episode_date': '2020-10-21 13:05:06', 'name': 'Strike Witches 3', 'poster': '026260.jpg'}, {'episode': '03', 'slug': '/anime/our-last-crusade-or-the-rise-of-a-new-world-369305/episode-03-767829', 'type': 'SUB', 'episode_date': '2020-10-21 10:51:00', 'name': 'Our Last Crusade or the Rise of a New World', 'poster': '000226.jpg'}, {'episode': '02', 'slug': '/anime/i-tried-asking-in-dogeza-904702/episode-02-437355', 'type': 'SUB', 'episode_date': '2020-10-21 10:45:18', 'name': 'I Tried Asking In Dogeza', 'poster': '026648.jpg'}, {'episode': '03', 'slug': '/anime/tsukiuta-the-animation-2-557455/episode-03-287162', 'type': 'SUB', 'episode_date': '2020-10-21 10:44:42', 'name': 'Tsukiuta. The Animation 2', 'poster': '820686.jpg'}, {'episode': '03', 'slug': '/anime/the-bears-bear-a-bare-kuma-796435/episode-03-162916', 'type': 'SUB', 'episode_date': '2020-10-21 09:13:14', 'name': 'The Bears Bear a Bare Kuma', 'poster': '860826.jpg'}, {'episode': '03', 'slug': '/anime/noblesse-235053/episode-03-981310', 'type': 'SUB', 'episode_date': '2020-10-21 09:00:40', 'name': 'Noblesse', 'poster': '608424.jpg'}, {'episode': '02', 'slug': '/anime/magatsu-wahrheit-891283/episode-02-866158', 'type': 'SUB', 'episode_date': '2020-10-20 11:20:34', 'name': 'MAGATSU WAHRHEIT', 'poster': '608666.jpg'}, {'episode': '03', 'slug': '/anime/ikebukuro-west-gate-park-691911/episode-03-263142', 'type': 'SUB', 'episode_date': '2020-10-20 10:56:55', 'name': 'Ikebukuro West Gate Park', 'poster': '666664.jpg'}, {'episode': '148', 'slug': '/anime/black-clover-2017-779724/episode-148-300441', 'type': 'SUB', 'episode_date': '2020-10-20 06:28:03', 'name': 'Black Clover (TV)', 'poster': '101072l.jpg'}, {'episode': '27', 'slug': '/anime/shadowverse-tv-421345/episode-27-955768', 'type': 'SUB', 'episode_date': '2020-10-20 06:26:51', 'name': 'Shadowverse (TV)', 'poster': '666806.jpg'}, {'episode': '09', 'slug': '/anime/the-god-of-high-school-dub-535982/episode-09-450531', 'type': 'DUB', 'episode_date': '2020-10-19 19:43:06', 'name': 'The God of High School (Dub)', 'poster': '080044.jpg'}, {'episode': '02', 'slug': '/anime/that-is-the-bottleneck-690087/episode-02-628733', 'type': 'SUB', 'episode_date': '2020-10-19 14:40:57', 'name': 'That Is the Bottleneck', 'poster': '444246.jpg'}, {'episode': '02', 'slug': '/anime/a3-season-autumn-winter-550289/episode-02-461734', 'type': 'SUB', 'episode_date': '2020-10-19 14:15:39', 'name': 'A3! Season Autumn & Winter', 'poster': '402062.jpg'}, {'episode': '03', 'slug': '/anime/sleepy-princess-in-the-demon-castle-285782/episode-03-842704', 'type': 'SUB', 'episode_date': '2020-10-19 14:11:26', 'name': 'Sleepy Princess in the Demon Castle', 'poster': '640404.jpg'}, {'episode': '02', 'slug': '/anime/osomatsu-san-3rd-season-819143/episode-02-982706', 'type': 'SUB', 'episode_date': '2020-10-19 14:03:19', 'name': 'Osomatsu-san 3rd Season', 'poster': '202486.jpg'}, {'episode': '03', 'slug': '/anime/one-room-third-season-499311/episode-03-876754', 'type': 'SUB', 'episode_date': '2020-10-19 13:20:40', 'name': 'One Room Third Season', 'poster': '062642.jpg'}, {'episode': '03', 'slug': '/anime/golden-kamuy-3rd-season-334268/episode-03-773123', 'type': 'SUB', 'episode_date': '2020-10-19 11:46:00', 'name': 'Golden Kamuy 3rd Season', 'poster': '688482.jpg'}, {'episode': '22', 'slug': '/anime/olympia-kyklos-844515/episode-22-504260', 'type': 'SUB', 'episode_date': '2020-10-19 10:33:03', 'name': 'Olympia Kyklos', 'poster': '602440.jpg'}, {'episode': '02', 'slug': '/anime/dropout-idol-fruit-tart-250012/episode-02-275796', 'type': 'SUB', 'episode_date': '2020-10-19 09:45:13', 'name': 'Dropout Idol Fruit Tart', 'poster': '882208.jpg'}, {'episode': '01', 'slug': '/anime/tales-of-crestoria-the-wake-of-sin-262628/episode-01-886618', 'type': 'SUB', 'episode_date': '2020-10-18 19:30:42', 'name': 'Tales of Crestoria: The Wake of Sin', 'poster': '286246.jpg'}, {'episode': '10', 'slug': '/anime/monster-girl-doctor-dub-544371/episode-10-938410', 'type': 'DUB', 'episode_date': '2020-10-18 19:27:29', 'name': 'Monster Girl Doctor (Dub)', 'poster': '226846.jpg'}, {'episode': '12', 'slug': '/anime/ninja-collection-534620/episode-12-385259', 'type': 'SUB', 'episode_date': '2020-10-18 19:16:29', 'name': 'Ninja Collection', 'poster': '224060.jpg'}, {'episode': '03', 'slug': '/anime/eagle-talon-golden-spell-209160/episode-03-610282', 'type': 'SUB', 'episode_date': '2020-10-18 15:50:45', 'name': 'EAGLE TALON ~Golden Spell~', 'poster': '046688.jpg'}, {'episode': '02', 'slug': '/anime/maesetsu-opening-act-785785/episode-02-382107', 'type': 'SUB', 'episode_date': '2020-10-18 13:41:16', 'name': 'Maesetsu! Opening Act', 'poster': '244084.jpg'}, {'episode': '02', 'slug': '/anime/gochuumon-wa-usagi-desu-ka-bloom-689727/episode-02-711257', 'type': 'SUB', 'episode_date': '2020-10-18 13:06:29', 'name': 'Gochuumon wa Usagi Desu ka? Bloom', 'poster': '626482.jpg'}, {'episode': '05', 'slug': '/anime/idolish-seven-second-beat-591646/episode-05-890510', 'type': 'SUB', 'episode_date': '2020-10-18 11:41:41', 'name': 'Idolish Seven: Second Beat!', 'poster': '660442.jpg'}, {'episode': '03', 'slug': '/anime/by-the-grace-of-the-gods-966108/episode-03-968250', 'type': 'SUB', 'episode_date': '2020-10-18 11:24:25', 'name': 'By the Grace of the Gods', 'poster': '824606.jpg'}, {'episode': '100', 'slug': '/anime/douluo-dalu-2nd-season-315209/episode-100-525693', 'type': 'SUB', 'episode_date': '2020-10-18 10:30:18', 'name': 'Douluo Dalu 2nd Season', 'poster': '080440.jpg'}, {'episode': '02', 'slug': '/anime/moriarty-the-patriot-422966/episode-02-320240', 'type': 'SUB', 'episode_date': '2020-10-18 10:09:45', 'name': 'Moriarty the Patriot', 'poster': '806424.jpg'}, {'episode': '03', 'slug': '/anime/talentless-nana-407356/episode-03-813110', 'type': 'SUB', 'episode_date': '2020-10-18 09:41:11', 'name': 'Talentless Nana', 'poster': '224224.jpg'}]
+            var tr;
+            for (var i = 0; i < json.length; i++) {
+              tr = $('<tr/>');
+              tr.append("<td>" + i + "</td>");
+              tr.append("<td>" + json[i].name + "</td>");
+              tr.append("<td>" + json[i].episode + "</td>");
+              tr.append("<td>" + json[i].type + "</td>");
+              tr.append("<td>" + json[i].episode_date + "</td>");
+
+              $('tbody').append(tr);
+            }
+          });
+      
+          
+   </script> 
+   {% endblock %}
+
