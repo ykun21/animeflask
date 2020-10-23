@@ -28,3 +28,10 @@ urllib3==1.25.10
 w3lib==1.22.0
 websockets==8.1
 Werkzeug==1.0.1
+
+ujson~=4.0.1
+pip~=20.2.2
+configparser~=5.0.0
+cache~=1.0.3
+colorama~=0.4.3
+setuptools~=49.6.0

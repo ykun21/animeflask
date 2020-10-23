@@ -6,6 +6,8 @@ from flask import request, render_template
 from app import app
 from app import cache
 
+session = requests.Session()
+
 
 @app.route('/home/', methods=['GET'])
 def home():
@@ -30,7 +32,7 @@ def recentDub():
 
 @cache.cached(timeout=14400, key_prefix="frontpage")
 def frontPage():
-    page = requests.get("https://www1.kickassanime.rs/api/frontpage_video_list")
+    page = session.get("https://www1.kickassanime.rs/api/frontpage_video_list")
     context = ujson.loads(page.content)
     return context
 
@@ -43,7 +45,7 @@ def animeList():
 
 # @cache.cached(timeout=14400, key_prefix="anime_list")
 def fetchAnimeList():
-    page = requests.get("https://www1.kickassanime.rs/anime-list")
+    page = session.get("https://www1.kickassanime.rs/anime-list")
     soup = BeautifulSoup(page.content, 'html.parser')
     start = str(soup.find_all('script')[6]).index('\"animes\":')
     end = str(soup.find_all('script')[6]).index('\"filters\"')
@@ -56,7 +58,7 @@ def fetchAnimeList():
 @app.route('/player/', methods=['GET'])
 def video():
     url = request.args['url']
-    page = requests.get(url)
+    page = session.get(url)
     soup = BeautifulSoup(page.content, 'html.parser')
     start = str(soup.find_all('script')[7]).index('\"episode\"')
     end = str(soup.find_all('script')[7]).index('|| {}')
@@ -70,7 +72,7 @@ def video():
 
 
 def scrapPlayers(link):
-    page = requests.get(str(link))
+    page = session.get(str(link))
     soup = BeautifulSoup(page.content, 'html.parser')
     start = str(soup.find_all('script')[3]).index('[{\"name\"')
     end = str(soup.find_all('script')[3]).index(';')
@@ -89,9 +91,9 @@ def search_post():
     if request.method == "POST":
         if len(query) <= 2:
             return "Please write atleast 3 characters"
-        page = requests.get("https://www1.kickassanime.rs/search?q="+str(query))
+        page = session.get("https://www1.kickassanime.rs/search?q=" + str(query))
         soup = BeautifulSoup(page.content, 'html.parser')
         start = str(soup.find_all('script')[6]).index('\"animes\":')
         end = str(soup.find_all('script')[6]).index(',\"query\"')
-        context = str(soup.find_all('script')[6]).strip()[start:end].replace('\"animes\":',"")
+        context = str(soup.find_all('script')[6]).strip()[start:end].replace('\"animes\":', "")
         return render_template("search.html", content=context)
