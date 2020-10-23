@@ -14,10 +14,11 @@
     <div class="bg-light border-right" id="sidebar-wrapper">
       <div class="sidebar-heading">AnimeFlask</div>
       <div class="list-group list-group-flush">
-        <a href="#" class="list-group-item list-group-item-action bg-light">HOME</a>
-        <a href="#" class="list-group-item list-group-item-action bg-light">RECENT SUB</a>
-        <a href="#" class="list-group-item list-group-item-action bg-light">RECENT DUB</a>
+        <a href="{{ url_for('home')}}" class="list-group-item list-group-item-action bg-light">HOME</a>
+        <a href="{{ url_for('recentSub')}}" class="list-group-item list-group-item-action bg-light">RECENT SUB</a>
+        <a href="{{ url_for('recentDub')}}" class="list-group-item list-group-item-action bg-light">RECENT DUB</a>
         <a href="{{ url_for('search')}}" class="list-group-item list-group-item-action bg-light">SEACRH</a>
+        <a href="{{ url_for('animeList')}}" class="list-group-item list-group-item-action bg-light">ANIME LIST</a>
         <a href="https://github.com/y-kun-21" target="_blank" class="list-group-item list-group-item-action bg-light">GITHUB</a>
       </div>
     </div>
