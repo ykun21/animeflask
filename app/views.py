@@ -1,3 +1,5 @@
+import json
+
 import requests
 import ujson
 from bs4 import BeautifulSoup
@@ -40,21 +42,21 @@ def frontPage():
 @app.route('/anime_list/', methods=['GET'])
 def animeList():
     context = fetchAnimeList()
-    return context
+    return render_template("animelist.html", content=context)
 
 
-# @cache.cached(timeout=14400, key_prefix="anime_list")
+@cache.cached(timeout=14400, key_prefix="anime_list")
 def fetchAnimeList():
     page = session.get("https://www1.kickassanime.rs/anime-list")
     soup = BeautifulSoup(page.content, 'html.parser')
     start = str(soup.find_all('script')[6]).index('\"animes\":')
-    end = str(soup.find_all('script')[6]).index('\"filters\"')
-    script = str(soup.find_all('script')[6]).strip()[start:end]
-    # getContext = ujson.loads(script)
+    end = str(soup.find_all('script')[6]).index(',\"filters\"')
+    script = str(soup.find_all('script')[6]).strip()[start:end].replace('\"animes\":', "")
+    getContext = json.loads(script)
+    return getContext
 
-    return script
 
-
+@cache.cached(timeout=100)
 @app.route('/player/', methods=['GET'])
 def video():
     url = request.args['url']
@@ -77,6 +79,7 @@ def scrapPlayers(link):
     start = str(soup.find_all('script')[3]).index('[{\"name\"')
     end = str(soup.find_all('script')[3]).index(';')
     script = str(soup.find_all('script')[3]).strip()[start:end]
+    print(script)
     return script
 
 
@@ -97,3 +100,9 @@ def search_post():
         end = str(soup.find_all('script')[6]).index(',\"query\"')
         context = str(soup.find_all('script')[6]).strip()[start:end].replace('\"animes\":', "")
         return render_template("search.html", content=context)
+
+
+@app.route('/detail/<url>/')
+def detail(url):
+    page = session.get(url)
+    print(page.content)
