@@ -1,0 +1,26 @@
+{% extends "main.html" %} {% block title %} HOME {% endblock %} {% block content %}
+  <div class="row m-5" style="border:none; background:white; height:400px;">
+      <div class="col">
+        <img id="image" style="height:400px; margin-left:-15px;" />
+      </div>
+      <div class="col p-5" style="margin-right: 60px;">  
+       <h2 class="my-2" id="title" style="font-size:35px; letter-spacing: 5px;"></h2>
+        <p id="description" style="font-size:25px; color:#03225C;"></p>
+      </div>
+  </div>
+<script>
+$(document).ready(function() {
+  const None = undefined
+  const False = undefined
+  var json = {{content | safe}}
+  console.log(json)
+  document.getElementById("title").innerHTML = json[0].name;
+  document.getElementById("description").innerHTML = json[0].description;
+  document.getElementById("image").src ="https://www1.kickassanime.rs/uploads/"+json[0].image+"";
+});
+
+function onClickFunc (href) {
+        console.log(href)
+        window.location.href="http://localhost:5000/detail/?url=https://www1.kickassanime.rs"+href+"";
+    }
+</script> {% endblock %}
