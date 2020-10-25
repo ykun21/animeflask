@@ -19,17 +19,17 @@ $(document).ready(function() {
   var tr;
   for(var i = 0; i < json.length; i++) {
     tr = $('<tr/>');
-    tr.append("<td>" + i + "</td>");
-    tr.append(`<td onclick="return onclickfunc('${ json[i].slug }') style="color:white" id="table-data"> ${ json[i].name }</td>`);
-    tr.append("<td>" + json[i].episode + "</td>");
-    tr.append("<td>" + json[i].type + "</td>");
-    tr.append("<td>" + json[i].episode_date + "</td>");
+    tr.append(`<td> ${i} </td>`);
+    tr.append(`<td onclick="return onClickFunc('${ json[i].slug }')" style="color:white" id="table-data"> ${ json[i].name }</td>`);
+    tr.append(`<td> ${json[i].episode } </td>`);
+    tr.append(`<td> ${json[i].type } </td>`);
+    tr.append(`<td> ${json[i].episode_date } </td>`);
     $('tbody').append(tr);
   }
 });
 
-function onclickfunc (href) {
+function onClickFunc (href) {
         console.log(href)
-        window.location.href="{{ url_for('detail', url=" + href + ")}}"
+        window.location.href="http://localhost:5000/detail/?url=https://www1.kickassanime.rs"+href+"";
     }
 </script> {% endblock %}

@@ -102,7 +102,15 @@ def search_post():
         return render_template("search.html", content=context)
 
 
-@app.route('/detail/<url>/')
-def detail(url):
+@cache.cached(timeout=400)
+@app.route('/detail/')
+def detail():
+    url = request.args['url']
     page = session.get(url)
-    print(page.content)
+    soup = BeautifulSoup(page.content, 'html.parser')
+    start = str(soup.find_all('script')[6]).index('\"anime\":')
+    end = str(soup.find_all('script')[6]).index('} || {}')
+    script = str(soup.find_all('script')[6]).strip()[start:end].replace('\"anime\":', "")
+    context = ujson.loads("["+str(script)+"]")
+    print(context)
+    return render_template("detail.html", content=context)
