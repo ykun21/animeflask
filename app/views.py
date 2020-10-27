@@ -1,4 +1,5 @@
 import json
+import re
 
 import requests
 import ujson
@@ -68,7 +69,7 @@ def video():
     jsonFy = ujson.loads("{" + script)
     link = jsonFy["episode"]["link1"]
     if not link:
-        return {"status code": 404}
+        return {"status code": "Error no link found"}
     script = scrapPlayers(link)
     return render_template("videos.html", content=script)
 
@@ -106,11 +107,14 @@ def search_post():
 @app.route('/detail/')
 def detail():
     url = request.args['url']
-    page = session.get(url)
+    removeEp = re.sub(r"|/episode-.*", "", url, flags=re.IGNORECASE)
+    print(removeEp)
+    page = session.get(removeEp, headers={"Referer": str(removeEp),
+                                          "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; "
+                                                        "rv:81.0) Gecko/20100101 Firefox/81.0"})
     soup = BeautifulSoup(page.content, 'html.parser')
     start = str(soup.find_all('script')[6]).index('\"anime\":')
     end = str(soup.find_all('script')[6]).index('} || {}')
     script = str(soup.find_all('script')[6]).strip()[start:end].replace('\"anime\":', "")
-    context = ujson.loads("["+str(script)+"]")
-    print(context)
+    context = ujson.loads("[" + str(script) + "]")
     return render_template("detail.html", content=context)
