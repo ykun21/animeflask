@@ -1,26 +1,34 @@
 {% extends "main.html" %} {% block title %} HOME {% endblock %} {% block content %}
-  <div class="row m-5" style="border:none; background:white; height:400px;">
-      <div class="col">
-        <img id="image" style="height:400px; margin-left:-15px;" />
-      </div>
-      <div class="col p-5" style="margin-right: 60px;">  
-       <h2 class="my-2" id="title" style="font-size:35px; letter-spacing: 5px;"></h2>
-        <p id="description" style="font-size:25px; color:#03225C;"></p>
-      </div>
-  </div>
+<div class="container py-2">
+    <div class="row">
+        <div class="col">
+            <h2 class="font-weight-bold my-5" id="title"></h2>
+            <p id="description"></p>
+            <div class="row" id="genre"></div>
+            <p class="font-weight-bold my-3" id="status"></p>
+            <div class="row" id="episode"></div>
+        </div>
+    </div>
+</div>
 <script>
 $(document).ready(function() {
-  const None = undefined
-  const False = undefined
-  var json = {{content | safe}}
-  console.log(json)
-  document.getElementById("title").innerHTML = json[0].name;
-  document.getElementById("description").innerHTML = json[0].description;
-  document.getElementById("image").src ="https://www1.kickassanime.rs/uploads/"+json[0].image+"";
-});
-
-function onClickFunc (href) {
-        console.log(href)
-        window.location.href="http://localhost:5000/detail/?url=https://www1.kickassanime.rs"+href+"";
+    const None = undefined
+    const False = undefined
+    var json = {{ content | safe }}
+    var tr;
+    for (var i = 0; i < json[0]["episodes"].length; i++) {
+        btn = $('<tr/>');
+        btn.append("<a class='btn btn-primary m-2 p-2' href='/player/?url=https://www1.kickassanime.rs" + json[0].episodes[i].slug + "' target='_blank' style='color:white'> " + json[0].episodes[i].epnum + "</a>");
+        $('#episode').append(btn);
     }
+    for (var i = 0; i < json[0]["genres"].length; i++) {
+        genre = $('<tr/>');
+        genre.append("<p  class='badge badge-secondary m-2 p-2'>" + json[0]["genres"][i].name + "</p>");
+        $('#genre').append(genre);
+    }
+    document.getElementById("title").innerHTML = json[0].name;
+    document.getElementById("description").innerHTML = json[0].description;
+    document.getElementById("status").innerHTML = json[0].status;
+    document.getElementById("image").src = "https://www1.kickassanime.rs/uploads/" + json[0].image + "";
+});
 </script> {% endblock %}

@@ -13,28 +13,26 @@
         </div>
         <div class="col-sm-9">
             <div class="embed-responsive embed-responsive-16by9">
-                <iframe id="player"
-                    class="embed-responsive-item"
-                    src="" allowfullscreen
-                ></iframe>
+                <iframe id="player" class="embed-responsive-item" src="" allowfullscreen></iframe>
             </div>
         </div>
     </div>
 </div>
 <script>
-    $(document).ready(function() {
-      var json = {{content | safe}}
-      var tr;
-       document.getElementById('player').src = json[0].src;
-      for(var i = 0; i < json.length; i++) {
+$(document).ready(function() {
+    var json = {{ content | safe }}
+    var tr;
+    document.getElementById('player').src = json[0].src;
+    for (var i = 0; i < json.length; i++) {
         tr = $('<tr/>');
         tr.append(`<td onclick="return switchPlayer('${ json[i].src }')" style="color:white" id="table-data">${ json[i].name }</td>`);
         $('tbody').append(tr);
-      }
-    });
-    function switchPlayer(src) {
-      console.log(src)
-      document.getElementById('player').src = src;
     }
+});
+
+function switchPlayer(src) {
+    console.log(src)
+    document.getElementById('player').src = src;
+}
 </script>
 {% endblock %}
