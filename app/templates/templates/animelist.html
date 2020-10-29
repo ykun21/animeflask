@@ -1,0 +1,46 @@
+{% extends "main.html" %}
+{% block title %}
+ANIME LIST
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center align-items-center">
+        <div class="text-center" id="before-result">
+            <img class="col" src="https://i.pinimg.com/originals/62/79/ce/6279ce4af4acbcbffd9a7023eeec9675.gif" alt="loader">
+        </div>
+    </div>
+</div>
+<div class="mx-5 my-5">
+    <table class="table table-dark" id="result-table" hidden="true">
+        <thead class="bg-danger">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">ID</th>
+                <th scope="col">NAME</th>
+                <th scope="col">EPISODE NO</th>
+                <th scope="col">DESCRIPTION</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+<script>
+$(document).ready(function() {
+    const None = undefined
+    var json = {{ content | safe }}
+    var tr;
+    for (var i = 0; i < json.length; i++) {
+        tr = $('<tr/>');
+        tr.append("<td>" + i + "</td>");
+        tr.append("<td>" + json[i].anime_id + "</td>");
+        tr.append("<td> <a href='/detail/?url=https://www1.kickassanime.rs" + json[i].slug + "' style='color:white'> " + json[i].name + "</a> </td>");
+        tr.append("<td>" + json[i].eps + "</td>");
+        tr.append("<td>" + json[i].description + "</td>");
+        $('tbody').append(tr);
+    }
+    document.getElementById("before-result").hidden = true;
+    document.getElementById("result-table").hidden = false;
+});
+</script>
+{% endblock %}

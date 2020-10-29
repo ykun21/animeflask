@@ -1,0 +1,37 @@
+{% extends "main.html" %} {% block content %}
+<div class="container">
+    <div class="m-5 justify-content-center">
+        <form class="form-inline" method="POST">
+            <input class="form-control col-lg-10" type="search" name="query" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-primary my-2 mx-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+</div>
+<div class="mt-5 text-center" id="before-result">
+    <h4> Please enter anime you like to watch.</h4>
+</div>
+<div class="mx-5 my-5">
+    <table class="table table-dark" hidden="true" id="result-table">
+        <thead class="bg-warning">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">NAME</th>
+            </tr>
+        </thead>
+        <tbody> </tbody>
+    </table>
+</div>
+<script>
+$(document).ready(function() {
+    var json = {{ content | safe }}
+    var tr;
+    for (var i = 0; i < json.length; i++) {
+        tr = $('<tr/>');
+        tr.append("<td>" + i + "</td>");
+        tr.append("<td> <a href='/detail/?url=https://www1.kickassanime.rs" + json[i].slug + "' style='color:white'> " + json[i].name + "</a> </td>");
+        $('tbody').append(tr);
+    }
+    document.getElementById("before-result").hidden = true;
+    document.getElementById("result-table").hidden = false;
+});
+</script> {% endblock %}

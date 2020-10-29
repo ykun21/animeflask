@@ -1,0 +1,34 @@
+{% extends "main.html" %} {% block title %} HOME {% endblock %} {% block content %}
+<div class="container py-2">
+    <div class="row">
+        <div class="col">
+            <h2 class="font-weight-bold my-5" id="title"></h2>
+            <p id="description"></p>
+            <div class="row" id="genre"></div>
+            <p class="font-weight-bold my-3" id="status"></p>
+            <div class="row" id="episode"></div>
+        </div>
+    </div>
+</div>
+<script>
+$(document).ready(function() {
+    const None = undefined
+    const False = undefined
+    var json = {{ content | safe }}
+    var div;
+    for (var i = 0; i < json[0]["episodes"].length; i++) {
+        btn = $('<div/>');
+        btn.append("<a class='btn btn-primary m-2 p-2' href='/player/?url=https://www1.kickassanime.rs" + json[0].episodes[i].slug + "' target='_blank' style='color:white'> " + json[0].episodes[i].epnum + "</a>");
+        $('#episode').append(btn);
+    }
+    for (var i = 0; i < json[0]["genres"].length; i++) {
+        genre = $('<tr/>');
+        genre.append("<p  class='badge badge-secondary m-2 p-2'>" + json[0]["genres"][i].name + "</p>");
+        $('#genre').append(genre);
+    }
+    document.getElementById("title").innerHTML = json[0].name;
+    document.getElementById("description").innerHTML = json[0].description;
+    document.getElementById("status").innerHTML = json[0].status;
+    document.getElementById("image").src = "https://www1.kickassanime.rs/uploads/" + json[0].image + "";
+});
+</script> {% endblock %}
