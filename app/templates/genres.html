@@ -1,0 +1,20 @@
+{% extends "main.html" %} {% block title %} GENRE {% endblock %} {% block content %}
+<div class="container py-2">
+      <h3 class="text-center my-5"> GENRES </h3>
+    <div class="row justify-content-center" id="genres">
+            <!-- <a href="/by_genre?query=/genre/action" class="shadow-lg p-3 m-3 bg-dark text-light text-center rounded" style="width:150px">Action</a> -->   
+            
+    </div>
+</div>
+<script>
+      $(document).ready(function() {
+    var json = {{ content | safe }}
+    var p;
+    for (var i = 0; i < json.length; i++) {
+        p = $('<p/>');
+        p.append("<a class='shadow rounded btn btn-outline-primary p-3 m-3 text-center' href='/by_genre?query=" + json[i].slug + "' style='width:160px; color:white'>" + json[i].name + "</a>");
+        $('#genres').append(p);
+    } 
+});
+</script>
+{% endblock %}

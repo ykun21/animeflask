@@ -1,0 +1,157 @@
+[{
+        "name": "Action",
+        "slug": "/genre/action"
+    },
+    {
+        "name": "Adventure",
+        "slug": "/genre/adventure"
+    },
+    {
+        "name": "Cars",
+        "slug": "/genre/cars"
+    },
+    {
+        "name": "Chinese",
+        "slug": "/genre/chinese"
+    },
+    {
+        "name": "Dementia",
+        "slug": "/genre/dementia"
+    },
+    {
+        "name": "Demons",
+        "slug": "/genre/demons"
+    },
+    {
+        "name": "Drama",
+        "slug": "/genre/drama"
+    },
+    {
+        "name": "Dub",
+        "slug": "/genre/dub"
+    },
+    {
+        "name": "Ecchi",
+        "slug": "/genre/ecchi"
+    },
+    {
+        "name": "Fantasy",
+        "slug": "/genre/fantasy"
+    },
+    {
+        "name": "Game",
+        "slug": "/genre/game"
+    },
+    {
+        "name": "Harem",
+        "slug": "/genre/harem"
+    },
+    {
+        "name": "Historical",
+        "slug": "/genre/historical"
+    },
+    {
+        "name": "Horror",
+        "slug": "/genre/horror"
+    },
+    {
+        "name": "Josei",
+        "slug": "/genre/josei"
+    },
+    {
+        "name": "Kids",
+        "slug": "/genre/kids"
+    },
+    {
+        "name": "Magic",
+        "slug": "/genre/magic"
+    },
+    {
+        "name": "Martial Arts",
+        "slug": "/genre/martial-arts"
+    },
+    {
+        "name": "Mecha",
+        "slug": "/genre/mecha"
+    },
+    {
+        "name": "Military",
+        "slug": "/genre/military"
+    },
+    {
+        "name": "Music",
+        "slug": "/genre/music"
+    },
+    {
+        "name": "Mystery",
+        "slug": "/genre/mystery"
+    },
+    {
+        "name": "Parody",
+        "slug": "/genre/parody"
+    },
+    {
+        "name": "Psychological",
+        "slug": "/genre/psychological"
+    },
+    {
+        "name": "Romance",
+        "slug": "/genre/romance"
+    },
+    {
+        "name": "Samurai",
+        "slug": "/genre/samurai"
+    },
+    {
+        "name": "School",
+        "slug": "/genre/school"
+    },
+    {
+        "name": "shoujo",
+        "slug": "/genre/shoujo"
+    },
+    {
+        "name": "shoujo Ai",
+        "slug": "/genre/shoujo-ai"
+    },
+    {
+        "name": "Shounen",
+        "slug": "/genre/shounen"
+    },
+    {
+        "name": "Shounen Ai",
+        "slug": "/genre/shounen-ai"
+    },
+    {
+        "name": "Slice of Life",
+        "slug": "/genre/slice-of-life"
+    },
+    {
+        "name": "Space",
+        "slug": "/genre/space"
+    },
+    {
+        "name": "Sports",
+        "slug": "/genre/sports"
+    },
+    {
+        "name": "Supernatural",
+        "slug": "/genre/supernatural"
+    },
+    {
+        "name": "Thriller",
+        "slug": "/genre/thriller"
+    },
+    {
+        "name": "Vampire",
+        "slug": "/genre/vampire"
+    },
+    {
+        "name": "Yaoi",
+        "slug": "/genre/yaoi"
+    },
+    {
+        "name": "Yuri",
+        "slug": "/genre/yuri"
+    }
+]

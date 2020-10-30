@@ -6,12 +6,12 @@ ANIME LIST
 <div class="container">
     <div class="row justify-content-center align-items-center">
         <div class="text-center" id="before-result">
-            <img class="col" src="https://i.pinimg.com/originals/65/ba/48/65ba488626025cff82f091336fbf94bb.gif" style="width:900px" alt="saitama">
+            <img class="col" src="https://i.pinimg.com/originals/62/79/ce/6279ce4af4acbcbffd9a7023eeec9675.gif" alt="loader">
         </div>
     </div>
 </div>
 <div class="mx-5 my-5">
-    <table class="table table-dark table-bordered table-striped" id="result-table" hidden="true">
+    <table class="table shadow-lg table-dark" id="result-table" hidden="true">
         <thead class="bg-danger">
             <tr>
                 <th scope="col">#</th>
@@ -34,7 +34,7 @@ $(document).ready(function() {
         tr = $('<tr/>');
         tr.append("<td>" + i + "</td>");
         tr.append("<td>" + json[i].anime_id + "</td>");
-        tr.append(`<td><a href="https://www1.kickassanime.rs${ json[i].slug }" style="color:white">${ json[i].name }</a></td>`);
+        tr.append("<td> <a href='/detail/?url=https://www1.kickassanime.rs" + json[i].slug + "' style='color:white'> " + json[i].name + "</a> </td>");
         tr.append("<td>" + json[i].eps + "</td>");
         tr.append("<td>" + json[i].description + "</td>");
         $('tbody').append(tr);

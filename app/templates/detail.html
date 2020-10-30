@@ -15,15 +15,15 @@ $(document).ready(function() {
     const None = undefined
     const False = undefined
     var json = {{ content | safe }}
-    var tr;
+    var btn;
     for (var i = 0; i < json[0]["episodes"].length; i++) {
-        btn = $('<tr/>');
-        btn.append("<a class='btn btn-primary m-2 p-2' href='/player/?url=https://www1.kickassanime.rs" + json[0].episodes[i].slug + "' target='_blank' style='color:white'> " + json[0].episodes[i].epnum + "</a>");
+        btn = $('<div/>');
+        btn.append("<a class='btn shadow rounded btn-outline-primary m-2 p-2' href='/player/?url=https://www1.kickassanime.rs" + json[0].episodes[i].slug + "' target='_blank' style='color:white'> " + json[0].episodes[i].epnum + "</a>");
         $('#episode').append(btn);
     }
     for (var i = 0; i < json[0]["genres"].length; i++) {
         genre = $('<tr/>');
-        genre.append("<p  class='badge badge-secondary m-2 p-2'>" + json[0]["genres"][i].name + "</p>");
+        genre.append("<a class='badge badge-secondary m-2 p-2' href='/by_genre?query=" + json[0]["genres"][i].slug + "' style='color:white'> " + json[0]["genres"][i].name + "</a>");
         $('#genre').append(genre);
     }
     document.getElementById("title").innerHTML = json[0].name;

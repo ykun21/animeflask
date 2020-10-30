@@ -40,7 +40,7 @@ def frontPage():
         page = session.get("https://www1.kickassanime.rs/api/frontpage_video_list")
         context = ujson.loads(page.content)
         return context
-    except:
+    except ConnectionError:
         time.sleep(3)
         frontPage()
 
@@ -61,12 +61,19 @@ def fetchAnimeList():
         script = str(soup.find_all('script')[6]).strip()[start:end].replace('\"animes\":', "")
         getContext = json.loads(script)
         return getContext
-    except:
+    except ConnectionError:
         time.sleep(3)
         fetchAnimeList()
 
 
-@cache.cached(timeout=100)
+@app.route('/genres/', methods=['GET'])
+def genre():
+    with open('app/static/genres.json') as f:
+        context = json.load(f)
+    return render_template("genres.html", content=context)
+
+
+@cache.cached(timeout=3000)
 @app.route('/player/', methods=['GET'])
 def video():
     try:
@@ -82,21 +89,31 @@ def video():
             return {"status code": "Error no link found"}
         script = scrapPlayers(link)
         return render_template("videos.html", content=script)
-    except:
+    except ConnectionError:
         time.sleep(3)
         video()
 
 
 def scrapPlayers(link):
     try:
+        print(link)
         page = session.get(str(link))
         soup = BeautifulSoup(page.content, 'html.parser')
-        start = str(soup.find_all('script')[3]).index('[{\"name\"')
-        end = str(soup.find_all('script')[3]).index(';')
-        script = str(soup.find_all('script')[3]).strip()[start:end]
-        print(script)
-        return script
-    except:
+        print(page.content)
+        try:
+            start = str(soup.find_all('script')[3]).index('[{\"name\"')
+            end = str(soup.find_all('script')[3]).index(';')
+            script = str(soup.find_all('script')[3]).strip()[start:end]
+            print(script)
+            return script
+        except ValueError:
+            no_servers = [{
+                "name": "Default",
+                "src": link
+            }]
+            context = ujson.dumps(no_servers)
+            return context
+    except ConnectionError:
         time.sleep(3)
         frontPage()
 
@@ -119,7 +136,7 @@ def search_post():
             end = str(soup.find_all('script')[6]).index(',\"query\"')
             context = str(soup.find_all('script')[6]).strip()[start:end].replace('\"animes\":', "")
             return render_template("search.html", content=context)
-    except:
+    except ConnectionError :
         time.sleep(3)
         search_post()
 
@@ -140,24 +157,23 @@ def detail():
         script = str(soup.find_all('script')[6]).strip()[start:end].replace('\"anime\":', "")
         context = ujson.loads("[" + str(script) + "]")
         return render_template("detail.html", content=context)
-    except:
+    except ConnectionError:
         time.sleep(3)
         frontPage()
 
 
 @app.route('/by_genre/', methods=['GET'])
 def by_genre():
-    genre = request.args['query']
+    by_genre = request.args['query']
     try:
-        print("https://www1.kickassanime.rs" + str(genre))
-        page = session.get("https://www1.kickassanime.rs" + str(genre))
+        print("https://www1.kickassanime.rs" + str(by_genre))
+        page = session.get("https://www1.kickassanime.rs" + str(by_genre))
         soup = BeautifulSoup(page.content, 'html.parser')
-        start = str(soup.find_all('script')[6]).index('appData =')
+        start = str(soup.find_all('script')[6]).index('\"animes\":')
         end = str(soup.find_all('script')[6]).index(',\"ax\"')
-        uncleaned_json= str(soup.find_all('script')[6]).strip()[start:end].replace('appData =', "")
-        context = ujson.loads("[" + str(uncleaned_json))
-        return render_template("genre.html")
-    except:
+        context=str(soup.find_all('script')[6]).strip()[start:end].replace('\"animes\":', "")
+        return render_template("by_genre.html",content=context)
+    except ConnectionError:
         time.sleep(3)
         by_genre()
 

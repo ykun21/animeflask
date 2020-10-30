@@ -3,8 +3,9 @@ from flask_caching import Cache
 
 config = {
     "DEBUG": True,
-    "CACHE_TYPE": "simple",
-    "CACHE_DEFAULT_TIMEOUT": 300
+    "CACHE_TYPE": "filesystem",
+    'CACHE_DIR': 'cache',
+    "CACHE_DEFAULT_TIMEOUT": 3000
 }
 
 app = Flask(__name__)
