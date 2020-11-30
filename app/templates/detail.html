@@ -18,7 +18,7 @@ $(document).ready(function() {
     var btn;
     for (var i = 0; i < json[0]["episodes"].length; i++) {
         btn = $('<div/>');
-        btn.append("<a class='btn shadow rounded btn-outline-primary m-2 p-2' href='/player/?url=https://www1.kickassanime.rs" + json[0].episodes[i].slug + "' target='_blank' style='color:white'> " + json[0].episodes[i].epnum + "</a>");
+        btn.append("<a class='btn shadow rounded btn-outline-primary m-2 p-2' href='/player/?url=https://www2.kickassanime.rs" + json[0].episodes[i].slug + "' target='_blank' style='color:white'> " + json[0].episodes[i].epnum + "</a>");
         $('#episode').append(btn);
     }
     for (var i = 0; i < json[0]["genres"].length; i++) {
@@ -30,5 +30,6 @@ $(document).ready(function() {
     document.getElementById("description").innerHTML = json[0].description;
     document.getElementById("status").innerHTML = json[0].status;
     document.getElementById("image").src = "https://www1.kickassanime.rs/uploads/" + json[0].image + "";
+
 });
 </script> {% endblock %}

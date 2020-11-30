@@ -54,11 +54,11 @@ def animeList():
 @cache.cached(timeout=14400, key_prefix="anime_list")
 def fetchAnimeList():
     try:
-        page = session.get("https://www1.kickassanime.rs/anime-list")
+        page = session.get("https://www2.kickassanime.rs/anime-list")
         soup = BeautifulSoup(page.content, 'html.parser')
-        start = str(soup.find_all('script')[6]).index('\"animes\":')
-        end = str(soup.find_all('script')[6]).index(',\"filters\"')
-        script = str(soup.find_all('script')[6]).strip()[start:end].replace('\"animes\":', "")
+        start = str(soup.find_all('script')[5]).index('\"animes\":')
+        end = str(soup.find_all('script')[5]).index(',\"filters\"')
+        script = str(soup.find_all('script')[5]).strip()[start:end].replace('\"animes\":', "")
         getContext = json.loads(script)
         return getContext
     except ConnectionError:
@@ -80,9 +80,9 @@ def video():
         url = request.args['url']
         page = session.get(url)
         soup = BeautifulSoup(page.content, 'html.parser')
-        start = str(soup.find_all('script')[7]).index('\"episode\"')
-        end = str(soup.find_all('script')[7]).index('|| {}')
-        script = str(soup.find_all('script')[7]).strip()[start:end]
+        start = str(soup.find_all('script')[6]).index('\"episode\"')
+        end = str(soup.find_all('script')[6]).index('|| {}')
+        script = str(soup.find_all('script')[6]).strip()[start:end]
         jsonFy = ujson.loads("{" + script)
         link = jsonFy["episode"]["link1"]
         if not link:
@@ -130,11 +130,11 @@ def search_post():
         if request.method == "POST":
             if len(query) <= 2:
                 return "Please write atleast 3 characters"
-            page = session.get("https://www1.kickassanime.rs/search?q=" + str(query))
+            page = session.get("https://www2.kickassanime.rs/search?q=" + str(query))
             soup = BeautifulSoup(page.content, 'html.parser')
-            start = str(soup.find_all('script')[6]).index('\"animes\":')
-            end = str(soup.find_all('script')[6]).index(',\"query\"')
-            context = str(soup.find_all('script')[6]).strip()[start:end].replace('\"animes\":', "")
+            start = str(soup.find_all('script')[5]).index('\"animes\":')
+            end = str(soup.find_all('script')[5]).index(',\"query\"')
+            context = str(soup.find_all('script')[5]).strip()[start:end].replace('\"animes\":', "")
             return render_template("search.html", content=context)
     except ConnectionError :
         time.sleep(3)
@@ -152,10 +152,12 @@ def detail():
                                               "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; "
                                                             "rv:81.0) Gecko/20100101 Firefox/81.0"})
         soup = BeautifulSoup(page.content, 'html.parser')
-        start = str(soup.find_all('script')[6]).index('\"anime\":')
-        end = str(soup.find_all('script')[6]).index('} || {}')
-        script = str(soup.find_all('script')[6]).strip()[start:end].replace('\"anime\":', "")
-        context = ujson.loads("[" + str(script) + "]")
+        start = str(soup.find_all('script')[5]).index('\"anime\":')
+        end = str(soup.find_all('script')[5]).index(',\"aid\"')
+        script = str(soup.find_all('script')[5]).strip()[start:end].replace('\"anime\":', "")
+        print("[" + script +"}]")
+        context = ujson.loads("[" + str(script) + "}]")
+        print(context)
         return render_template("detail.html", content=context)
     except ConnectionError:
         time.sleep(3)
@@ -166,13 +168,13 @@ def detail():
 def by_genre():
     by_genre = request.args['query']
     try:
-        print("https://www1.kickassanime.rs" + str(by_genre))
-        page = session.get("https://www1.kickassanime.rs" + str(by_genre))
+        print("https://www2.kickassanime.rs" + str(by_genre))
+        page = session.get("https://www2.kickassanime.rs" + str(by_genre))
         soup = BeautifulSoup(page.content, 'html.parser')
-        start = str(soup.find_all('script')[6]).index('\"animes\":')
-        end = str(soup.find_all('script')[6]).index(',\"ax\"')
-        context=str(soup.find_all('script')[6]).strip()[start:end].replace('\"animes\":', "")
-        return render_template("by_genre.html",content=context)
+        start = str(soup.find_all('script')[5]).index('\"animes\":')
+        end = str(soup.find_all('script')[5]).index(',\"ax\"')
+        context = str(soup.find_all('script')[5]).strip()[start:end].replace('\"animes\":', "")
+        return render_template("by_genre.html", content=context)
     except ConnectionError:
         time.sleep(3)
         by_genre()
