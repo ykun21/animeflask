@@ -104,7 +104,7 @@ def scrapPlayers(link):
             start = str(soup.find_all('script')[3]).index('[{\"name\"')
             end = str(soup.find_all('script')[3]).index(';')
             script = str(soup.find_all('script')[3]).strip()[start:end]
-            print(script)
+
             return script
         except ValueError:
             no_servers = [{
@@ -146,7 +146,7 @@ def search_post():
 def detail():
     url = request.args['url']
     removeEp = re.sub(r"|/episode-.*", "", url, flags=re.IGNORECASE)
-    print(removeEp)
+
     try:
         page = session.get(removeEp, headers={"Referer": str(removeEp),
                                               "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; "
@@ -155,9 +155,7 @@ def detail():
         start = str(soup.find_all('script')[5]).index('\"anime\":')
         end = str(soup.find_all('script')[5]).index(',\"aid\"')
         script = str(soup.find_all('script')[5]).strip()[start:end].replace('\"anime\":', "")
-        print("[" + script +"}]")
         context = ujson.loads("[" + str(script) + "}]")
-        print(context)
         return render_template("detail.html", content=context)
     except ConnectionError:
         time.sleep(3)
@@ -168,7 +166,6 @@ def detail():
 def by_genre():
     by_genre = request.args['query']
     try:
-        print("https://www2.kickassanime.rs" + str(by_genre))
         page = session.get("https://www2.kickassanime.rs" + str(by_genre))
         soup = BeautifulSoup(page.content, 'html.parser')
         start = str(soup.find_all('script')[5]).index('\"animes\":')
